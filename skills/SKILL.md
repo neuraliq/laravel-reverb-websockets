@@ -27,7 +27,7 @@ You are working with Laravel applications that need real-time bidirectional comm
 ## Rules
 
 1. Always implement `ShouldBroadcast` (not `ShouldBroadcastNow`) for non-critical events — queues the broadcast for reliability
-2. Always use `broadcastAs()` with a dot-prefixed name — prevents event class name exposure to clients
+2. Always define `broadcastAs()` to use custom event names — clients listen with a `.` prefix (e.g., `.listen('.order.shipped')`) to avoid class name exposure
 3. Always authorize private/presence channels in `routes/channels.php` — never skip authorization
 4. Always use `toOthers()` when the broadcasting user shouldn't receive their own event
 5. Always clean up channels in `onUnmounted()` with `Echo.leave()` — prevents memory leaks
